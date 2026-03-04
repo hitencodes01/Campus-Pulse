@@ -4,9 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node dist/index.js",
-    "dev": "nodemon src/index.ts",
+    "dev": "nodemon --exec tsx src/index.ts",
     "build": "tsc"
   },
   "keywords": [],
@@ -14,6 +13,7 @@
   "license": "ISC",
   "type": "module",
   "devDependencies": {
+    "@types/cookie-parser": "^1.4.10",
     "@types/express": "^5.0.6",
     "@types/node": "^25.3.3",
     "nodemon": "^3.1.14",
@@ -21,12 +21,16 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "bcrypt": "^6.0.0",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/cors": "^2.8.19",
+    "@types/jsonwebtoken": "^9.0.10",
+    "bcryptjs": "^3.0.3",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.6",
     "dotenv": "^17.3.1",
     "express": "^5.2.1",
     "jsonwebtoken": "^9.0.3",
-    "mongoose": "^9.2.3"
+    "mongoose": "^9.2.3",
+    "tsx": "^4.21.0"
   }
 }
