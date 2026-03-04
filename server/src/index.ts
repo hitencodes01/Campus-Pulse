@@ -4,6 +4,7 @@ import { connectDB } from "./config/db.js";
 import authRoutes from "./routes/authRoutes.js";
 import testRoutes from "./routes/testRoutes.js";
 import clubRoutes from './routes/clubRoutes.js'
+import membershipRoutes from './routes/membershipRoutes.js'
 import cookieParser from "cookie-parser";
 config();
 
@@ -17,6 +18,7 @@ app.get("/", async (req, res) => {
 app.use("/api/auth", authRoutes);
 app.use("/api/test", testRoutes);
 app.use("/api/clubs",clubRoutes)
+app.use("/api/membership",membershipRoutes)
 
 const port = process.env.PORT as string;
 

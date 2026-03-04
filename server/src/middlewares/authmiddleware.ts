@@ -10,7 +10,6 @@ export const protext = (req : AuthRequest , res : Response , next : NextFunction
         return res.status(401).json({ message: "Not authorized" });
     }
     try {
-        console.log(token)
         const decoded = jwt.verify(token , process.env.SECRET_KEY as string)
         req.user = decoded;
         next()
