@@ -3,8 +3,11 @@ import express from "express";
 import { connectDB } from "./config/db.js";
 import authRoutes from "./routes/authRoutes.js";
 import testRoutes from "./routes/testRoutes.js";
-import clubRoutes from './routes/clubRoutes.js'
-import membershipRoutes from './routes/membershipRoutes.js'
+import clubRoutes from "./routes/clubRoutes.js";
+import membershipRoutes from "./routes/membershipRoutes.js";
+import festRoutes from "./routes/festRoutes.js";
+import eventRoutes from "./routes/eventRoutes.js";
+import registrationRoutes from "./routes/registrationRoutes.js";
 import cookieParser from "cookie-parser";
 config();
 
@@ -17,8 +20,11 @@ app.get("/", async (req, res) => {
 });
 app.use("/api/auth", authRoutes);
 app.use("/api/test", testRoutes);
-app.use("/api/clubs",clubRoutes)
-app.use("/api/membership",membershipRoutes)
+app.use("/api/clubs", clubRoutes);
+app.use("/api/membership", membershipRoutes);
+app.use("/api/fests", festRoutes);
+app.use("/api/events", eventRoutes);
+app.use("/api/registration", registrationRoutes);
 
 const port = process.env.PORT as string;
 
