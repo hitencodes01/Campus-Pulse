@@ -33,3 +33,35 @@ export const registerForEvent = async (req: any, res: Response) => {
     return res.status(500).json({ message: "Server Error" });
   }
 };
+
+// get event registrations
+export const getEventRegistrations = async (req: Request, res: Response) => {
+  try {
+    const { eventId } = req.params;
+    const registrations = await Registration.find({ event: eventId }).populate(
+      "user",
+      "name email",
+    );
+    res.status(200).json({ count: registrations.length, registrations });
+  } catch (error) {
+    return res.status(500).json({ message: "Server Error" });
+  }
+};
+
+// user dashboard API
+
+export const getMyRegistration = async (req: any, res: Response) => {
+  const userId = req.user.id;
+
+  const registrations = await Registration.find({ user: userId }).populate({
+    path: "event",
+    populate: {
+      path: "fest",
+      select: "name startDate endDate",
+    },
+  });
+  res.status(200).json({
+    count: registrations.length,
+    registrations,
+  });
+};

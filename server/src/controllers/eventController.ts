@@ -1,4 +1,4 @@
-import { Response } from "express";
+import { Request, Response } from "express";
 import { Fest } from "../models/fest.model.js";
 import { Club } from "../models/club.model.js";
 import { Event } from "../models/event.model.js";
@@ -42,6 +42,24 @@ export const createEvent = async (req: any, res: Response) => {
       message: "Event created successfully",
       event,
     });
+  } catch (error) {
+    return res.status(500).json({ message: "Server Error" });
+  }
+};
+
+export const getFestEvents = async (req: Request, res: Response) => {
+  try {
+    const { festId } = req.params;
+    const events = await Event.find({ fest: festId }).populate({
+      path: "organizingClubs",
+      select: "name clubHeads",
+      populate: {
+        path: "clubHeads",
+        select: "name",
+      },
+    });
+
+    return res.status(200).json({ count: events.length, events });
   } catch (error) {
     return res.status(500).json({ message: "Server Error" });
   }
