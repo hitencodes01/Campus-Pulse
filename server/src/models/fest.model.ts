@@ -5,7 +5,7 @@ export interface IFest extends Document {
   description: string;
   startDate: Date;
   endDate: Date;
-  isActive: boolean;
+  status: string;
 }
 
 const festSchema = new Schema<IFest>(
@@ -28,9 +28,10 @@ const festSchema = new Schema<IFest>(
       type: Date,
       required: true,
     },
-    isActive: {
-      type: Boolean,
-      default: true,
+    status: {
+      type: String,
+      enum : ["upcoming" , "ongoing" , "completed"],
+      default: "upcoming",
     },
   },
   { timestamps: true }
