@@ -1,46 +1,34 @@
-import React, { useReducer } from "react";
-import { register } from "../api/axios";
-import { useAuth } from "../context/AuthContext";
-import UserInput from "../utils/UserInput";
-import type { RegisterActions, RegisterState } from "../types/types";
+import { useReducer } from "react";
+import type { LoginActions, LoginState } from "../types/types";
 import UserEmail from "../utils/UserEmail";
 import UserPassword from "../utils/UserPassword";
 import UserRoles from "../utils/UserRoles";
+import { loginUser } from "../api/axios";
+import { useAuth } from "../context/AuthContext";
 
-function reducer(
-  state: RegisterState,
-  actions: RegisterActions,
-): RegisterState {
+function reducer(state: LoginState, actions: LoginActions): LoginState {
   return {
     ...state,
     [actions.field]: actions.value,
   };
 }
 
-export default function Register() {
-  const { login } = useAuth();
+export default function Login() {
+  const {login} = useAuth()
   const [state, dispatch] = useReducer(reducer, {
-    name: "",
     email: "",
     password: "",
     role: null,
   });
-
-  const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleLogin = async () => {
     try {
-      const response = await register(state);
-      console.log(response.data);
-      if (response.data.success) {
-        login(response.data.user);
+      const response = await loginUser(state);
+      if(response.data.success){
+        console.log(response.data.message)
+        login(response.data.user)
       }
-      alert(response.data.message);
-    } catch (error: any) {
-      if (error.response) {
-        alert(error.response.data.message);
-      } else {
-        alert("Something went wrong");
-      }
+    } catch (error) {
+      
     }
   };
   return (
@@ -52,19 +40,12 @@ export default function Register() {
               Campus Pulse
             </h2>
             <p className="text-base-content/60 text-sm font-medium">
-              Create your account to join the movement
+              Login your account to join the movement
             </p>
           </div>
 
-          <form onSubmit={handleRegister} className="flex flex-col gap-5">
+          <form onSubmit={handleLogin} className="flex flex-col gap-5">
             <div className="space-y-4">
-              <div className="form-control w-full">
-                <label className="label-text font-bold mb-1 opacity-70">
-                  Username
-                </label>
-                <UserInput inputHandler={dispatch} />
-              </div>
-
               <div className="form-control w-full">
                 <label className="label-text font-bold mb-1 opacity-70">
                   Email Address
@@ -88,14 +69,17 @@ export default function Register() {
                 type="submit"
                 className="btn btn-primary btn-block shadow-lg hover:scale-[1.02] transition-transform active:scale-95"
               >
-                Register
+                Login
               </button>
             </div>
 
             <p className="text-center text-sm opacity-70">
-              Already have an account?
-              <a href="/login" className="link link-primary ml-1 font-semibold">
-                Login here
+              New to Campus Pulse?
+              <a
+                href="/register"
+                className="link link-primary ml-1 font-semibold"
+              >
+                Register here
               </a>
             </p>
           </form>

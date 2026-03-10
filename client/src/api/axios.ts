@@ -1,14 +1,21 @@
 import axios from "axios";
-import type { Register } from "../types/types";
+import type { LoginState, RegisterState } from "../types/types";
 
 const api = axios.create({
   baseURL: "http://localhost:8000/api",
   withCredentials: true,
 });
 
-
-export const register = (payload: Register) => {
+export const register = (payload: RegisterState) => {
   return api.post("/auth/register", payload, {
     headers: { "Content-Type": "application/json" },
+  });
+};
+
+export const loginUser = (payload: LoginState) => {
+  return api.post("/auth/login", payload, {
+    headers: {
+      "Content-Type": "application/json",
+    },
   });
 };

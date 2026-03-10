@@ -1,14 +1,8 @@
-import ThemeSwitcher from "./components/ThemeSwitcher";
-import Register from "./pages/Register";
+import { RouterProvider } from "react-router-dom";
+import router from "./router/AppRouter";
 
 function App() {
-  return (
-    <>
-      <h1 className="text-amber-300">Hello World! from Campus Pulse</h1>
-      <ThemeSwitcher />
-      <Register/>
-    </>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
