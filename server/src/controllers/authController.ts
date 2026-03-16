@@ -29,7 +29,7 @@ export const registerUser = async (req: Request, res: Response) => {
         maxAge: 7 * 24 * 60 * 60 * 1000,
       })
       .json({
-        success : true,
+        success: true,
         message: "User registered successfully",
         user: {
           id: user._id,
@@ -70,7 +70,7 @@ export const loginUser = async (req: Request, res: Response) => {
         maxAge: 7 * 24 * 60 * 60 * 1000,
       })
       .json({
-        success : true,
+        success: true,
         message: "Login successfully",
         user: {
           id: user._id,
@@ -83,3 +83,4 @@ export const loginUser = async (req: Request, res: Response) => {
     res.status(500).json({ message: "Server Error" });
   }
 };
+

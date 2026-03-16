@@ -3,6 +3,7 @@ import { Fest } from "../models/fest.model.js";
 import { Club } from "../models/club.model.js";
 import { Event } from "../models/event.model.js";
 
+
 export const createEvent = async (req: any, res: Response) => {
   const { title, description, date, capacity, organizingClubs } = req.body;
   const { festId } = req.params;
@@ -62,5 +63,24 @@ export const getFestEvents = async (req: Request, res: Response) => {
     return res.status(200).json({ count: events.length, events });
   } catch (error) {
     return res.status(500).json({ message: "Server Error" });
+  }
+};
+
+export const getAllEvents = async (req: Request, res: Response) => {
+  try {
+    const events = await Event.find({}).populate({
+      path: "organizingClubs",
+      select: "name clubHeads",
+      populate: {
+        path: "clubHeads",
+        select: "name",
+      },
+    }).populate({path : "fest",select : "name description"});
+    if (!events) {
+      return res.status(404).json({ message: "Events noy found" });
+    }
+    return res.status(200).json({ success: true, events });
+  } catch (error) {
+    return res.status(500).json({ message: "Server error" });
   }
 };

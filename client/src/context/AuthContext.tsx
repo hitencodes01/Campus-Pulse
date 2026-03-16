@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 type User = {
   _id: string;
@@ -16,6 +16,10 @@ type AuthContextType = {
 const AuthContext = createContext<AuthContextType | null>(null);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+
+  useEffect(()=>{
+    
+  },[])
   const [user, setUser] = useState<User | null>(null);
 
   const login = (userData: User) => {

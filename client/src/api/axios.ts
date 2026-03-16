@@ -19,3 +19,11 @@ export const loginUser = (payload: LoginState) => {
     },
   });
 };
+
+export const fetchEvents = async (signal: any) => {
+  return api.get("/events", signal);
+};
+
+export const fetchFests = (signal : any) => {
+  return api.get("/fests",signal)
+}

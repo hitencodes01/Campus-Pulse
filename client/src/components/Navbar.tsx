@@ -12,12 +12,12 @@ export default function Navbar() {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 gap-1">
           <li>
-            <Link className="btn btn-ghost" to={""}>
+            <Link className="btn btn-ghost" to={"/events"}>
               Events
             </Link>
           </li>
           <li>
-            <Link className="btn btn-ghost" to={""}>
+            <Link className="btn btn-ghost" to={"/fests"}>
               Fests
             </Link>
           </li>

@@ -5,7 +5,6 @@ import UserInput from "../utils/UserInput";
 import type { RegisterActions, RegisterState } from "../types/types";
 import UserEmail from "../utils/UserEmail";
 import UserPassword from "../utils/UserPassword";
-import UserRoles from "../utils/UserRoles";
 
 function reducer(
   state: RegisterState,
@@ -23,7 +22,6 @@ export default function Register() {
     name: "",
     email: "",
     password: "",
-    role: null,
   });
 
   const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -47,6 +45,7 @@ export default function Register() {
     <div className="min-h-screen flex items-center justify-center bg-base-200 px-4 py-12">
       <div className="card w-full max-w-lg bg-base-100 shadow-2xl shadow-blue-400 border border-base-300">
         <div className="card-body gap-6">
+
           <div className="text-center space-y-2">
             <h2 className="text-3xl font-black tracking-tight text-primary">
               Campus Pulse
@@ -56,7 +55,7 @@ export default function Register() {
             </p>
           </div>
 
-          <form onSubmit={handleRegister} className="flex flex-col gap-5">
+          <form onSubmit={handleRegister} className="flex-col flex justify-center gap-5">
             <div className="space-y-4">
               <div className="form-control w-full">
                 <label className="label-text font-bold mb-1 opacity-70">
@@ -79,9 +78,6 @@ export default function Register() {
                 <UserPassword inputHandler={dispatch} />
               </div>
             </div>
-
-            <div className="divider text-xs uppercase opacity-40">Identity</div>
-            <UserRoles inputHandler={dispatch} formData={state} />
 
             <div className="form-control mt-4">
               <button

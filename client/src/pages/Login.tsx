@@ -1,10 +1,11 @@
-import { useReducer } from "react";
+import React, { useReducer } from "react";
 import type { LoginActions, LoginState } from "../types/types";
 import UserEmail from "../utils/UserEmail";
 import UserPassword from "../utils/UserPassword";
 import UserRoles from "../utils/UserRoles";
 import { loginUser } from "../api/axios";
 import { useAuth } from "../context/AuthContext";
+import { Link, useNavigate } from "react-router-dom";
 
 function reducer(state: LoginState, actions: LoginActions): LoginState {
   return {
@@ -14,21 +15,37 @@ function reducer(state: LoginState, actions: LoginActions): LoginState {
 }
 
 export default function Login() {
-  const {login} = useAuth()
+  const navigate = useNavigate();
+  const { login, user } = useAuth();
   const [state, dispatch] = useReducer(reducer, {
     email: "",
     password: "",
     role: null,
   });
-  const handleLogin = async () => {
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     try {
       const response = await loginUser(state);
-      if(response.data.success){
-        console.log(response.data.message)
-        login(response.data.user)
+      if (response.data.success) {
+        login(response.data.user);
+        switch (response.data.user.role) {
+          case "student":
+            navigate("/student");
+            break;
+          case "clubhead":
+            navigate("/clubhead");
+            break;
+          case "admin":
+            navigate("/admin");
+            break;
+          default:
+            navigate("/login");
+        }
+      } else {
+        alert("Not login");
       }
     } catch (error) {
-      
+      console.log(error);
     }
   };
   return (
@@ -75,12 +92,12 @@ export default function Login() {
 
             <p className="text-center text-sm opacity-70">
               New to Campus Pulse?
-              <a
-                href="/register"
+              <Link
+                to={"/register"}
                 className="link link-primary ml-1 font-semibold"
               >
                 Register here
-              </a>
+              </Link>
             </p>
           </form>
         </div>

@@ -8,6 +8,7 @@ import ProtectedLayout from "../layout/ProtectedLayout";
 import Events from "../pages/Events";
 import Fests from "../pages/Fests";
 import Clubs from "../pages/Clubs";
+import Admin from "../pages/admin/Admin";
 
 const router = createBrowserRouter([
   {
@@ -27,7 +28,7 @@ const router = createBrowserRouter([
         <ProtectedLayout />
       </RoleProtectedRoute>
     ),
-    children: [{ path: "/student" }],
+    children: [{ path: "/student-dashboard" },{path : "/admin" , element : <Admin/>}],
   },
 ]);
 

@@ -22,7 +22,7 @@ export const createFest = async (req: Request, res: Response) => {
 export const getAllFest = async (req: Request, res: Response) => {
   try {
     const fests = await Fest.find().sort({ startDate: 1 });
-    return res.status(200).json({ count: fests.length, fests });
+    return res.status(200).json({success : true, count: fests.length, fests });
   } catch (error) {
     return res.status(500).json({ message: "Server Error" });
   }

@@ -1,4 +1,4 @@
-export type Role = "student" | "admin" | "clubhead" | null
+export type Role = "student" | "admin" | "clubhead" | null;
 
 export type RegisterActions = {
   field: keyof RegisterState;
@@ -9,7 +9,6 @@ export type RegisterState = {
   name: string;
   email: string;
   password: string;
-  role: Role;
 };
 
 export type LoginState = {
@@ -19,12 +18,38 @@ export type LoginState = {
 };
 
 export type LoginActions = {
-   field: keyof LoginState;
+  field: keyof LoginState;
   value: string;
 };
 
-
 export interface UserInputProps {
-  inputHandler: (actions: {field : any , value : any}) => void;
-};
+  inputHandler: (actions: { field: any; value: any }) => void;
+}
 
+export interface EventItem {
+  _id: string;
+  title: string;
+  description: string;
+  date: Date;
+  capacity: number;
+  fest: {
+    _id: string;
+    name: string;
+    description: string;
+  };
+
+  organizingClubs: [
+    {
+      _id: string;
+      name: string;
+      clubHeads: [
+        {
+          _id: string;
+          name: string;
+        },
+      ];
+    },
+  ];
+  createdBy: string;
+  createdAt: Date;
+}
