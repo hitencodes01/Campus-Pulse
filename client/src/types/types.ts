@@ -53,3 +53,12 @@ export interface EventItem {
   createdBy: string;
   createdAt: Date;
 }
+
+export type FestItem = {
+  _id : string;
+  name: string;
+  description: string;
+  startDate: Date;
+  endDate: Date;
+  status: string;
+};
