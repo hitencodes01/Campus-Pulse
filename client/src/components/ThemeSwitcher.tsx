@@ -8,18 +8,12 @@ export default function ThemeSwitcher() {
     setTheme(theme === "dark" ? "light" : "dark");
   };
   return (
-    <label className="flex flex-row gap-2 items-center">
+    <button onClick={handleTheme} className="rounded-full">
       {theme === "dark" ? (
         <Moon className="swap-on h-5 w-5 fill-current" />
       ) : (
         <Sun className="swap-on h-5 w-5 fill-current" />
       )}
-      <input
-        type="checkbox"
-        checked={theme === "dark"}
-        onChange={handleTheme}
-        className="toggle toggle-primary"
-      />
-    </label>
+    </button>
   );
 }

@@ -2,9 +2,10 @@
 
 interface Prop {
   setData: (e: string) => void;
+  placeholder : string;
 }
 
-export default function SearchInput({ setData }: Prop) {
+export default function SearchInput({ setData , placeholder }: Prop) {
   return (
     <div className="my-2">
       <label className="input shadow-2xs shadow-blue-400">
@@ -29,7 +30,7 @@ export default function SearchInput({ setData }: Prop) {
           type="search"
           onChange={(e) => setData(e.target.value)}
           required
-          placeholder="Search Events"
+          placeholder={placeholder}
         />
       </label>
     </div>

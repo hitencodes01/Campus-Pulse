@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { fetchFests } from "../api/axios";
 import type { FestItem } from "../types/types";
 import SearchInput from "../utils/SearchInput";
+import FestCard from "../components/FestCard";
 
 export default function Fests() {
   const [loading, setLoading] = useState<boolean>(true);
@@ -41,30 +42,11 @@ export default function Fests() {
     return (
       <>
         {!error && (
-          <div>
-            <SearchInput setData={setSearch} />
-            <div className="grid grid-cols-3 gap-6 mx-5 my-10">
+          <div className="flex flex-col justify-center items-center">
+            <SearchInput setData={setSearch} placeholder="Search Fest" />
+            <div className="m-10 grid grid-cols-3 gap-10">
               {filterData.map((item: FestItem) => (
-                <div
-                  key={item._id}
-                  className="card bg-base-100 w-96 shadow-lg shadow-blue-400"
-                >
-                  <div className="card-body ">
-                    <h2 className="card-title">{item.name}</h2>
-                    <p>{item.description}</p>
-                    <p>
-                      {new Date(item.startDate).getDate()} to{" "}
-                      {new Date(item.endDate).getDate()}
-                      {new Date(item.startDate).toLocaleString("default", {
-                        month: "short",
-                      })}
-                    </p>
-                    <p>{item.status}</p>
-                    <div className="card-actions justify-end">
-                      <button className="btn btn-primary">Register</button>
-                    </div>
-                  </div>
-                </div>
+                <FestCard item={item} />
               ))}
             </div>
           </div>

@@ -31,8 +31,8 @@ export const createClub = async (req: Request, res: Response) => {
 // get All club
 export const getAllClub = async (req: Request, res: Response) => {
   try {
-    const clubs = await Club.find().populate("createdBy", "name email");
-    res.status(200).json({ clubs });
+    const clubs = await Club.find().populate("createdBy", "name email").populate({path : "clubHeads" , select : "_id name role"});
+    res.status(200).json({success : true, clubs });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Server Error" });

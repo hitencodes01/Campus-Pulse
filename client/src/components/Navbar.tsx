@@ -22,7 +22,7 @@ export default function Navbar() {
             </Link>
           </li>
           <li>
-            <Link className="btn btn-ghost" to={""}>
+            <Link className="btn btn-ghost" to={"/clubs"}>
               Clubs
             </Link>
           </li>
@@ -30,7 +30,7 @@ export default function Navbar() {
       </div>
       <div className="navbar-end">
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1 gap-2">
+          <ul className="menu menu-horizontal px-1 gap-3 ">
             <li>
               <ThemeSwitcher />
             </li>

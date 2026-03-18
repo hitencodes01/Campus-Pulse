@@ -55,10 +55,24 @@ export interface EventItem {
 }
 
 export type FestItem = {
-  _id : string;
+  _id: string;
   name: string;
   description: string;
   startDate: Date;
   endDate: Date;
   status: string;
+};
+
+
+export type ClubItem = {
+  _id : string;
+  name: string;
+  description: string;
+  category: string;
+  clubHeads: {
+    _id: string;
+    name: string;
+    role: string;
+  }[];
+  createdAt: Date;
 };

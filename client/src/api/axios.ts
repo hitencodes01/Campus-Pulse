@@ -27,3 +27,7 @@ export const fetchEvents = async (signal: any) => {
 export const fetchFests = (signal : any) => {
   return api.get("/fests",signal)
 }
+
+export const fetchClubs = (signal : any) => {
+  return api.get("/clubs",signal)
+} 
