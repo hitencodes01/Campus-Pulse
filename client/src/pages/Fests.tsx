@@ -46,7 +46,7 @@ export default function Fests() {
             <SearchInput setData={setSearch} placeholder="Search Fest" />
             <div className="m-10 grid grid-cols-3 gap-10">
               {filterData.map((item: FestItem) => (
-                <FestCard item={item} />
+                <FestCard item={item} key={item._id} />
               ))}
             </div>
           </div>

@@ -3,12 +3,18 @@ import PublicLayout from "../layout/PublicLayout";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
-import RoleProtectedRoute from "../components/RoleProtectedRoute";
-import ProtectedLayout from "../layout/ProtectedLayout";
 import Events from "../pages/Events";
 import Fests from "../pages/Fests";
 import Clubs from "../pages/Clubs";
 import Admin from "../pages/admin/Admin";
+import FestDetails from "../pages/FestDetails";
+import Student from "../pages/student/Student";
+import ClubHead from "../pages/clubhead/ClubHead";
+import ProtectedRoute from "../components/ProtectedRoute";
+import StudentLayout from "../layout/StudentLayout";
+import ClubHeadLayout from "../layout/ClubHeadLayout";
+import AdminLayout from "../layout/AdminLayout";
+import Unauthorize from "../pages/Unauthorize";
 
 const router = createBrowserRouter([
   {
@@ -17,18 +23,36 @@ const router = createBrowserRouter([
       { path: "/", element: <Home /> },
       { path: "/login", element: <Login /> },
       { path: "/register", element: <Register /> },
+      { path: "/unauthorize", element: <Unauthorize/> },
       { path: "/events", element: <Events /> },
       { path: "/fests", element: <Fests /> },
       { path: "/clubs", element: <Clubs /> },
+      { path: "/fests/:id", element: <FestDetails /> },
     ],
   },
   {
     element: (
-      <RoleProtectedRoute>
-        <ProtectedLayout />
-      </RoleProtectedRoute>
+      <ProtectedRoute allowedRoles={["student"]}>
+        <StudentLayout />
+      </ProtectedRoute>
     ),
-    children: [{ path: "/student-dashboard" },{path : "/admin" , element : <Admin/>}],
+    children: [{ path: "/student", element: <Student /> }],
+  },
+  {
+    element: (
+      <ProtectedRoute allowedRoles={["clubhead"]}>
+        <ClubHeadLayout />
+      </ProtectedRoute>
+    ),
+    children: [{ path: "/clubhead", element: <ClubHead /> }],
+  },
+  {
+    element: (
+      <ProtectedRoute allowedRoles={["admin"]}>
+        <AdminLayout />
+      </ProtectedRoute>
+    ),
+    children: [{ path: "/admin", element: <Admin /> }],
   },
 ]);
 

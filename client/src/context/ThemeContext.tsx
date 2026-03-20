@@ -8,9 +8,13 @@ const ThemeContext = createContext<{
 }>({ theme: "light", setTheme: () => {} });
 
 export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
-  const [theme, setTheme] = useState<Theme>("light");
+  const [theme, setTheme] = useState<Theme>(() => {
+    const savedTheme = localStorage.getItem("theme") as Theme | null;
+    return savedTheme || "light";
+  });
 
   useEffect(() => {
+    localStorage.setItem("theme", theme);
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
 

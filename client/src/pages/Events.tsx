@@ -45,7 +45,7 @@ export default function Events() {
           <SearchInput setData={setData} placeholder="Search Events" />
           <div className="m-10 grid grid-col-3 gap-10">
             {filterData.map((item: EventItem) => (
-              <EventCard item={item} />
+              <EventCard item={item} key={item._id} />
             ))}
           </div>
         </div>

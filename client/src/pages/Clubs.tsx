@@ -46,7 +46,7 @@ export default function Clubs() {
         <SearchInput setData={setData} placeholder="Search Clubs" />
         <div className="m-10 grid grid-cols-3 gap-10">
           {filterData.map((item: ClubItem) => (
-            <ClubCard club={item} />
+            <ClubCard club={item} key={item._id} />
           ))}
         </div>
       </div>

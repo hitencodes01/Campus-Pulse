@@ -31,3 +31,7 @@ export const fetchFests = (signal : any) => {
 export const fetchClubs = (signal : any) => {
   return api.get("/clubs",signal)
 } 
+
+export const fetchFest = (id : any , signal : any) => {
+  return api.get(`/fests/${id}` , signal)
+}

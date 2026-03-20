@@ -35,7 +35,7 @@ export const getSingleFest = async (req: Request, res: Response) => {
     if (!fest) {
       return res.status(404).json({ message: "Fest not found" });
     }
-    return res.status(200).json({ fest });
+    return res.status(200).json({ success : true , fest });
   } catch (error) {}
 };
 

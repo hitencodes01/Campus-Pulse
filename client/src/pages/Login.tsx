@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import  { useReducer } from "react";
 import type { LoginActions, LoginState } from "../types/types";
 import UserEmail from "../utils/UserEmail";
 import UserPassword from "../utils/UserPassword";
@@ -16,19 +16,19 @@ function reducer(state: LoginState, actions: LoginActions): LoginState {
 
 export default function Login() {
   const navigate = useNavigate();
-  const { login, user } = useAuth();
+  const { login } = useAuth();
   const [state, dispatch] = useReducer(reducer, {
     email: "",
     password: "",
     role: null,
   });
-  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleLogin = async (e : any) => {
     e.preventDefault();
     try {
       const response = await loginUser(state);
       if (response.data.success) {
-        login(response.data.user);
-        switch (response.data.user.role) {
+        login(await response.data.user);
+        switch (await response.data.user.role) {
           case "student":
             navigate("/student");
             break;

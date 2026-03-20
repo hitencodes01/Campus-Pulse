@@ -5,6 +5,7 @@ import UserInput from "../utils/UserInput";
 import type { RegisterActions, RegisterState } from "../types/types";
 import UserEmail from "../utils/UserEmail";
 import UserPassword from "../utils/UserPassword";
+import { useNavigate } from "react-router-dom";
 
 function reducer(
   state: RegisterState,
@@ -18,6 +19,7 @@ function reducer(
 
 export default function Register() {
   const { login } = useAuth();
+  const navigate = useNavigate()
   const [state, dispatch] = useReducer(reducer, {
     name: "",
     email: "",
@@ -31,6 +33,7 @@ export default function Register() {
       console.log(response.data);
       if (response.data.success) {
         login(response.data.user);
+        navigate("/student")
       }
       alert(response.data.message);
     } catch (error: any) {
