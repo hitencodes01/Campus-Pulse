@@ -9,11 +9,16 @@ export default function ProtectedRoute({
   children: React.ReactNode;
   allowedRoles: string[];
 }) {
-  const { user } = useAuth();
-  if (!user) {
+  const { isAuthenticated, user, loading } = useAuth();
+  if (loading) {
+    return <div>Loading...</div>; // or spinner
+  }
+
+  if (!isAuthenticated) {
     return <Navigate to={"/login"} />;
   }
-  if (!allowedRoles.includes(user.role)) {
+
+  if (allowedRoles && user && !allowedRoles.includes(user.role)) {
     return <Navigate to={"/unauthorized"} />;
   }
 

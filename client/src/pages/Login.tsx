@@ -1,4 +1,4 @@
-import  { useReducer } from "react";
+import { useReducer } from "react";
 import type { LoginActions, LoginState } from "../types/types";
 import UserEmail from "../utils/UserEmail";
 import UserPassword from "../utils/UserPassword";
@@ -22,12 +22,12 @@ export default function Login() {
     password: "",
     role: null,
   });
-  const handleLogin = async (e : any) => {
+  const handleLogin = async (e: any) => {
     e.preventDefault();
     try {
       const response = await loginUser(state);
       if (response.data.success) {
-        login(await response.data.user);
+        login();
         switch (await response.data.user.role) {
           case "student":
             navigate("/student");

@@ -1,6 +1,5 @@
+import { useAuth } from "../../context/AuthContext"
 
 export default function Student() {
-  return (
-    <div>Student</div>
-  )
+ return<div>Thanks</div>
 }

@@ -37,7 +37,17 @@ export default function Fests() {
   }, [fest, search]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className="skeleton h-full w-full"></div>
+  } else if (error) {
+    return (
+      <>
+        <div className="inline-grid *:[grid-area:1/1]">
+          <div className="status status-error animate-ping"></div>
+          <div className="status status-error"></div>
+        </div>{" "}
+        Server is down
+      </>
+    );
   } else {
     return (
       <>

@@ -84,3 +84,7 @@ export const loginUser = async (req: Request, res: Response) => {
   }
 };
 
+export const me = async (req: any, res: Response) => {
+  const user = req.user;
+  res.json({ user, ok: true });
+};

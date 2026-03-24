@@ -1,36 +1,58 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { api } from "../api/axios";
 
 type User = {
   _id: string;
-  name: string;
-  email: string;
   role: "student" | "admin" | "clubhead";
 };
 
 type AuthContextType = {
   user: User | null;
-  login: (user: User) => void;
-  logout: () => void;
+  isAuthenticated: boolean;
+  loading: boolean;
+  login: () => Promise<void>;
+  logout: () => Promise<void>;
 };
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-
-  useEffect(()=>{
-    
-  },[])
   const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const login = (userData: User) => {
-    setUser(userData);
+  const loadUser = async () => {
+    try {
+      const res = await api.get("/auth/me");
+      if (!res.data.ok) throw new Error("Not authenticated");
+      setUser(await res.data.user);
+      setIsAuthenticated(true);
+    } catch (err) {
+      setUser(null);
+      setIsAuthenticated(false);
+    } finally {
+      setLoading(false);
+    }
   };
-  const logout = () => {
+
+  useEffect(() => {
+    loadUser();
+  }, []);
+
+  const login = async () => {
+    await loadUser();
+  };
+
+  const logout = async () => {
+    await api.post("/auth/logout");
     setUser(null);
+    setIsAuthenticated(false);
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider
+      value={{ user, isAuthenticated, loading, login, logout }}
+    >
       {children}
     </AuthContext.Provider>
   );

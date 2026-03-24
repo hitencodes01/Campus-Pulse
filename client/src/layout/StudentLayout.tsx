@@ -1,5 +1,9 @@
+import Student from "../pages/student/Student";
+
 export default function StudentLayout() {
   return (
-    <div>StudentLayout</div>
+    <div>StudentLayout
+      <Student/>
+    </div>
   )
 }
