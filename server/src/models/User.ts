@@ -1,6 +1,6 @@
 import mongoose, { Document, Schema } from "mongoose";
 import { UserRole } from "../types/roles.js";
-import { compare, hash } from 'bcryptjs'
+import { compare, hash } from "bcryptjs";
 
 export interface IUser extends Document {
   name: string;
@@ -27,7 +27,7 @@ const UserSchema = new Schema<IUser>(
       type: String,
       required: true,
       minlength: 6,
-      select : false
+      select: false,
     },
     role: {
       type: String,

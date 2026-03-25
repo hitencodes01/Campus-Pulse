@@ -88,3 +88,13 @@ export const me = async (req: any, res: Response) => {
   const user = req.user;
   res.json({ user, ok: true });
 };
+export const profile = async (req: any, res: Response) => {
+  const user = req.user;
+  const id = req.params.id
+  try {
+    
+  } catch (error) {
+    
+  }
+  res.json({ user, ok: true });
+};

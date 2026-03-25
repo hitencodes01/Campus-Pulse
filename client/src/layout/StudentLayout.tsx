@@ -1,9 +1,11 @@
-import Student from "../pages/student/Student";
+import { Outlet } from "react-router-dom";
+import StudentNavbar from "../components/StudentNavbar";
 
 export default function StudentLayout() {
   return (
-    <div>StudentLayout
-      <Student/>
+    <div>
+      <StudentNavbar />
+      <Outlet/>
     </div>
-  )
+  );
 }

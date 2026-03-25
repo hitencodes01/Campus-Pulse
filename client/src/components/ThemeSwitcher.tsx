@@ -8,7 +8,7 @@ export default function ThemeSwitcher() {
     setTheme(theme === "dark" ? "light" : "dark");
   };
   return (
-    <button onClick={handleTheme} className="rounded-full">
+    <button onClick={handleTheme} className="rounded-full cursor-pointer">
       {theme === "dark" ? (
         <Moon className="swap-on h-5 w-5 fill-current" />
       ) : (

@@ -15,6 +15,7 @@ import StudentLayout from "../layout/StudentLayout";
 import ClubHeadLayout from "../layout/ClubHeadLayout";
 import AdminLayout from "../layout/AdminLayout";
 import Unauthorize from "../pages/Unauthorize";
+import Profile from "../pages/student/Profile";
 
 const router = createBrowserRouter([
   {
@@ -23,7 +24,7 @@ const router = createBrowserRouter([
       { path: "/", element: <Home /> },
       { path: "/login", element: <Login /> },
       { path: "/register", element: <Register /> },
-      { path: "/unauthorize", element: <Unauthorize/> },
+      { path: "/unauthorize", element: <Unauthorize /> },
       { path: "/events", element: <Events /> },
       { path: "/fests", element: <Fests /> },
       { path: "/clubs", element: <Clubs /> },
@@ -36,7 +37,10 @@ const router = createBrowserRouter([
         <StudentLayout />
       </ProtectedRoute>
     ),
-    children: [{ path: "/student", element: <Student /> }],
+    children: [
+      { path: "/student", element: <Student /> },
+      { path: "/student/profile", element: <Profile /> },
+    ],
   },
   {
     element: (
